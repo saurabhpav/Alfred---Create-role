@@ -1,0 +1,119 @@
+<button mat-raised-button (click)="isLinear = !isLinear" id="toggle-linear">
+  {{!isLinear ? 'Enable linear mode' : 'Disable linear mode'}}
+</button>
+<mat-stepper [linear]="isLinear" #stepper>
+  <mat-step [stepControl]="firstFormGroup">
+
+      <ng-template matStepLabel>Create</ng-template>
+
+
+<div class="cont">
+ <mat-table [formGroup]="firstFormGroup" [dataSource]="dataSource" class="mat-elevation-z8">
+ <!-- Position Column -->
+  <ng-container matColumnDef="position">
+    <mat-header-cell *matHeaderCellDef> No. </mat-header-cell>
+    <mat-cell *matCellDef="let element"> <mat-slide-toggle>{{element.weight}}</mat-slide-toggle>
+ </mat-cell>
+  </ng-container>
+
+  <!-- Name Column -->
+
+  <ng-container matColumnDef="name">
+    <mat-header-cell *matHeaderCellDef> Name </mat-header-cell>
+    <mat-cell *matCellDef="let element"> <mat-slide-toggle>{{element.position}}</mat-slide-toggle> </mat-cell>
+  </ng-container>
+
+  <!-- Weight Column -->
+
+  <ng-container matColumnDef="weight">
+    <mat-header-cell *matHeaderCellDef> Weight </mat-header-cell>
+    <mat-cell *matCellDef="let element">  <button mat-button [matMenuTriggerFor]="menu">{{element.name}}<mat-icon>keyboard_arrow_down</mat-icon> </button>
+<mat-menu #menu="matMenu">
+
+  <button mat-menu-item>Item 1</button>
+  <button mat-menu-item>Item 2</button>
+</mat-menu> </mat-cell>
+  </ng-container>
+
+  <!-- Symbol Column -->
+
+
+  <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+  <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+</mat-table>
+</div>
+
+
+      <div>
+        <button mat-button matStepperNext>Next</button>
+      </div>
+
+  </mat-step>
+
+  <mat-step [stepControl]="secondFormGroup" label="Fill out your address">
+
+   <div class="div1" [formGroup]="secondFormGroup">
+    <b class="b3">Role info</b>
+
+    <div class="cont1">
+
+        <p class="t1">Level (System hierarchy)</p>
+        <div class="innerc1">
+            <input class="innerc1" placeholder="L16">
+        </div>
+
+    </div>
+
+    <div class="cont1" id="cont2">
+
+        <p class="t1" id="t2">Grade (Client hierarchy)</p>
+
+            <input class="innerc1" id="ic2" placeholder="Enter details">
+
+
+    </div>
+
+    <div class="cont1" id="cont3">
+
+        <p class="t1" id="t3">Role name</p>
+
+            <input class="innerc1" id="ic3" placeholder="Enter details">
+
+    </div>
+
+    <div class="cont1" id="cont4">
+
+        <p class="t1" id="t4">Department</p>
+        <div class="inner">
+            <select class="innerc1" id="ic4" placeholder="Enter details">
+
+                <option value="volvo">ALFRED</option>
+                      <option value="saab">PRODX</option>
+                      <option value="mercedes">HEALTH CLAIM</option>
+                      <option value="audi">ADMIN</option>
+            </select>
+        </div>
+
+    </div>
+
+    <div class="cont1" id="cont5">
+
+        <p class="t1" id="t5">Role Description</p>
+        <div class="inner">
+            <input class="innerc1" id="ic5" placeholder="Enter details">
+        </div>
+      </div>
+
+    <button matStepperPrevious class="b5">Cancel</button>
+    <button
+     matStepperNext class="b6">Next</button>
+
+
+  <mat-step>
+    <ng-template matStepLabel>Done</ng-template>
+    <p>You are now done.</p>
+    <div>
+      <button mat-button matStepperPrevious>Back</button>
+      <button mat-button (click)="stepper.reset()">Reset</button>
+    </div>
+  </mat-step>
